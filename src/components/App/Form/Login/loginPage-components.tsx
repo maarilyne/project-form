@@ -1,8 +1,8 @@
 import React, {createRef, MutableRefObject, useState} from 'react';
 import {NavLink} from 'react-router-dom';
 import {LoadComponent} from '../../../../index';
-import {Simulate} from "react-dom/test-utils";
-import input = Simulate.input;
+// import {Simulate} from "react-dom/test-utils";
+// import input = Simulate.input;
 
 enum LoginInterface {
     username = 'Username',
@@ -76,7 +76,7 @@ const LoginPage: React.FC<any> = () => {
             <h2>Connexion</h2>
             <form onSubmit={onclick}>
                 <label htmlFor='username'>{userName}</label>
-                <input id='username' type='text' className='usernameInput' name='username' onBlur={(e: any) => {setVal(e.target.value); }}/>
+                <input id='username' type='text' className='usernameInput' name='username'/>
                 <label htmlFor='pwd'>{password}</label>
                 <input id='pwd' type='password' className='pwdInput' name='pwd'/>
                 <button name='sendData' type='submit' className='btns logSubmitBtn'>Login</button>
