@@ -1,0 +1,73 @@
+{
+  "name": "dynam-form",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build-react": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "type-check": "tsc --noEmit",
+    "prebuild:ci": "npm ci",
+    "build:ci": "node build/build.js",
+    "prebuild": "npm install",
+    "build:js": "node build/build.js",
+    "build": "npm run type-check && npm run build:js",
+    "predev": "npm install",
+    "dev": "npm run type-check && npm run dev:js",
+    "dev:js": "node build/build.js --dev --watch",
+    "lint": "eslint .",
+    "lint:ci": "eslint --format checkstyle --output-file build/eslint-output.xml ."
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.5.3",
+    "eslint": "^6.8.0",
+    "exports-loader": "^0.7.0",
+    "expose-loader": "^0.7.5",
+    "file-loader": "^6.0.0",
+    "glob": "^7.1.6",
+    "glob-array": "^1.0.0",
+    "imports-loader": "^0.8.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.14.1",
+    "npm": "^6.14.6",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
+    "ts-loader": "^5.4.5",
+    "tslint": "^5.15.0",
+    "typescript": "^4.0.3",
+    "webpack-cli": "^3.3.11",
+    "webpack-manifest-plugin": "^2.2.0"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "@types/react-router-dom": "^5.1.5",
+    "jquery": "^3.5.1",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.2.2",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "typescript": "^4.0.3"
+  }
+}

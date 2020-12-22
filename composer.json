@@ -1,0 +1,16 @@
+{
+  "name": "vendor_name/dynam-form",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "EPALLEMaryline",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "slim/slim": "3.*",
+    "ext-json": "*"
+  }
+}

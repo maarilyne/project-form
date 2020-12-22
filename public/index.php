@@ -1,0 +1,42 @@
+<?php
+use React\Autoloader;
+use React\Core\BundleLoader;
+
+session_start();
+ob_start();
+
+include_once __DIR__ . '/../server/src/Autoloader.php';
+$autoloader = new Autoloader();
+$autoloader->register();
+
+$bundleLoader = new BundleLoader();
+$mainJs = $bundleLoader->getBundle('main.js');
+$mainCss = $bundleLoader->getBundle('main.css');
+
+/*if ($isLogged) {
+    $loggedVar = 'true';
+} else {*/
+    $loggedVar = 'false';
+//}
+
+ob_end_clean();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="<?php echo $mainCss; ?>"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Formulaire dynamique</title>
+  </head>
+  <body>
+      <header>
+          <h1>Projet 1 - Formulaire React</h1>
+      </header>
+    <div id="root"></div>
+    <footer></footer>
+    <script>window.isLogged = <?php echo $loggedVar ?>;</script>
+    <script src="<?php echo $mainJs; ?>"></script>
+  </body>
+</html>
