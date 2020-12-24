@@ -10,6 +10,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 use React\Autoloader;
 use Slim\App;
 use React\Api\RegisterRoute;
+use React\Api\LoginRoute;
 
 session_start();
 ob_start();
@@ -31,13 +32,24 @@ $app->get('/form', function (Request $request, Response $response, array $args) 
 //Saves data sent in /form url, inside the $_SESSION variable
 $app->post('/form', function (Request $request, Response $response) {
     $reqData = $request->getParsedBody();
-    $routeClass = new RegisterRoute();
-    $routeClass->setData($reqData);
+    $registerClass = new RegisterRoute();
+    $registerClass->setData($reqData);
     $response->getBody()->write(json_encode(true));
 });
 
-$app->post('/login', function (Request $request, Response $response) {
+//Retrieves all the data sent in /form url and displays it on this page
+$app->get('/login', function (Request $request, Response $response, array $args) {
+    $loginClass = new RegisterRoute();
+    $retrievedData = $loginClass->getData();
+    $response->getBody()->write(json_encode($retrievedData));
+});
 
+//Saves data sent in /form url, inside the $_SESSION variable
+$app->post('/login', function (Request $request, Response $response) {
+    $reqData = $request->getParsedBody();
+    $loginClass = new LoginRoute();
+    $loginClass->setData($reqData);
+    $response->getBody()->write(json_encode(true));
 });
 
 $app->run();

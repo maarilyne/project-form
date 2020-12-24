@@ -38,7 +38,6 @@ class RegisterRoute{
      * @param array $data Form database
      */
     public function setData(array $data): void {
-        //$_SESSION[self::FORM_KEY] = $this->convertToAssocArray($data);
         $_SESSION[self::FORM_KEY] = $data;
         $this->generateJsonFile($data);
     }
