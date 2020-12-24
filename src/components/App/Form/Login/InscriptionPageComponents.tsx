@@ -1,5 +1,5 @@
 // @ts-ignore
-import React from 'react';
+import React, {useState} from 'react';
 import {PageInscription} from './PageInscription';
 
 export interface IDataUser {
@@ -8,14 +8,15 @@ export interface IDataUser {
 }
 
 export const InscriptionPageComponents = (): JSX.Element => {
+  const [loginInscription, setLoginInscription] = useState('');
+  const [loginPwd, setLoginPwd] = useState('');
 
   function onclick(event: any): void {
     event.preventDefault();
-    // ma fonction ici
 
     const dataUser: IDataUser = {
-      pseudo: '',
-      pwd : '',
+      pseudo: loginInscription,
+      pwd : loginPwd,
     };
 
     const pageInscription = new PageInscription();
@@ -25,9 +26,11 @@ export const InscriptionPageComponents = (): JSX.Element => {
   return (
     <form>
       <label htmlFor='pseudo'>Pseudo</label>
-      <input id='pseudo' name='pseudo' type='text' title='pseudo' value='VALUE' placeholder='Votre pseudo...'/>
+      <input id='pseudo' name='pseudo' type='text' title='pseudo' defaultValue={loginInscription}
+             onBlur={(event: any) => {setLoginInscription(event.target.value); }} placeholder='Votre pseudo...'/>
       <label htmlFor='password'>Password</label>
-      <input id='password' name='password' type='password' title='password' value='VALUE' placeholder='Votre mot de passe...'/>
+      <input id='password' name='password' type='password' title='password' defaultValue={loginPwd}
+             onBlur={(event: any) => {setLoginPwd(event.target.value); }} placeholder='Votre mot de passe...'/>
       <button type='button' onClick={onclick} value='save'>Envoyer</button>
     </form>
   );
