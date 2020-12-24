@@ -119,7 +119,7 @@ const getData = () : void => {
             }
         );
 };
-getData();
+//getData();
 
 //Array that will store the inputRefs
 const a: Array<any> = [];

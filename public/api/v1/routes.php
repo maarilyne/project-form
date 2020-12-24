@@ -38,18 +38,18 @@ $app->post('/form', function (Request $request, Response $response) {
 });
 
 //Retrieves all the data sent in /form url and displays it on this page
-$app->get('/login', function (Request $request, Response $response, array $args) {
+/*$app->get('/login', function (Request $request, Response $response, array $args) {
     $loginClass = new RegisterRoute();
-    $retrievedData = $loginClass->getData();
+    $retrievedData = $loginClass->isMatching();
     $response->getBody()->write(json_encode($retrievedData));
-});
+});*/
 
 //Saves data sent in /form url, inside the $_SESSION variable
 $app->post('/login', function (Request $request, Response $response) {
     $reqData = $request->getParsedBody();
     $loginClass = new LoginRoute();
-    $loginClass->setData($reqData);
-    $response->getBody()->write(json_encode(true));
+    $isLogged = $loginClass->logUser($reqData);
+    $response->getBody()->write(json_encode($isLogged));
 });
 
 $app->get('/inscription', function (Request $request, Response $response, array $args) {
