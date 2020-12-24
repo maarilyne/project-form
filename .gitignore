@@ -6,6 +6,7 @@
 .pnp.js
 .idea
 /public/client
+/public/manifest.json
 
 # testing
 /coverage
