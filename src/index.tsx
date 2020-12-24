@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App/app-component';
 import InputFields, {InputParams} from './components/App/Form/form-component';
+import {InscriptionPageComponents} from './components/App/Form/Login/InscriptionPageComponents';
 import LoginPage from './components/App/Form/Login/loginPage-components';
 import './components/App/styles/main.css';
 
@@ -29,6 +30,8 @@ if (window.isLogged) {
     LoadComponent.load(InputFields);
     // ReactDOM.render(<App/>, document.querySelector('#root'));
 } else {
-    LoadComponent.load(LoginPage);
+    LoadComponent.load(InscriptionPageComponents);
     // ReactDOM.render(<LoginPage/>, document.querySelector('#root'));
+    // testest
+    // test2
 }

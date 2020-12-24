@@ -52,4 +52,8 @@ $app->post('/login', function (Request $request, Response $response) {
     $response->getBody()->write(json_encode($isLogged));
 });
 
+$app->get('/inscription', function (Request $request, Response $response, array $args) {
+
+});
+
 $app->run();
