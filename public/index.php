@@ -1,4 +1,6 @@
 <?php
+
+use React\Api\LoginRoute;
 use React\Autoloader;
 use React\Core\BundleLoader;
 
@@ -13,11 +15,14 @@ $bundleLoader = new BundleLoader();
 $mainJs = $bundleLoader->getBundle('main.js');
 $mainCss = $bundleLoader->getBundle('main.css');
 
-/*if ($isLogged) {
+$loginRoute = new LoginRoute();
+if ($loginRoute->getData() !== null) {
     $loggedVar = 'true';
-} else {*/
+} else {
     $loggedVar = 'false';
-//}
+}
+//$loginRoute->logout();
+//session_destroy();
 
 ob_end_clean();
 ?>

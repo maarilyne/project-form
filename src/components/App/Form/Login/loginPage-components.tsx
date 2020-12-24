@@ -66,9 +66,11 @@ const LoginPage: React.FC<any> = () => {
             <h2>Connexion</h2>
             <form onSubmit={onclick}>
                 <label htmlFor='username'>{userName}</label>
-                <input id='username' type='text' className='usernameInput' name='username' value={user} onChange={(e: any) => {setUser(e.target.value); }}/>
+                <input id='username' type='text' className='usernameInput' name='username' defaultValue={user}
+                       onBlur={(e: any) => {setUser(e.target.value); }}/>
                 <label htmlFor='pwd'>{password}</label>
-                <input id='pwd' type='password' className='pwdInput' name='pwd' value={pwd} onChange={(e: any) => {setPwd(e.target.value); }}/>
+                <input id='pwd' type='password' className='pwdInput' name='pwd' defaultValue={pwd}
+                       onBlur={(e: any) => {setPwd(e.target.value); }}/>
                 <button name='sendData' type='submit' className='btns logSubmitBtn'>Login</button>
             </form>
         </>
