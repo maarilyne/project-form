@@ -65,9 +65,9 @@ const sendData = (data: Array<any>): void => {
     let val = event.target.value;
     this.setState({[nam]: val});
 }*/
-
 /*const translation = new Translation();
 const userName: string = translation.get('UserName');*/
+
 const userName: string = 'Username';
 const password: string = 'Password';
 const LoginPage: React.FC<any> = () => {
