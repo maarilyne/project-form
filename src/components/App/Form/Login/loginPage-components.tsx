@@ -1,6 +1,6 @@
 import React, {createRef, MutableRefObject, useState} from 'react';
-import {NavLink} from 'react-router-dom';
 import {LoadComponent} from '../../../../index';
+import InputFields from '../form-component';
 
 enum LoginInterface {
     username = 'Username',
@@ -34,11 +34,11 @@ const sendData = (data: Array<any>): void => {
         )
         .then(
             (result) => {
-                // tslint:disable-next-line:no-console
-                console.log('setData ' + result);
+                // console.log('setData ' + result);
+                // LoadComponent.load(InputFields);
+                window.location.reload(true);
             },
             (error: TypeError) => {
-                // tslint:disable-next-line:no-console
                 console.log(error);
             },
         );
@@ -51,7 +51,6 @@ const LoginPage: React.FC<any> = () => {
     // Hook useState : enables us to retrieve any input data submitted in the form
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
-
     /**
      * Submit Form
      * @param e Submit Event

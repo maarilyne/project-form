@@ -9,8 +9,7 @@ class App extends React.Component {
     public render() {
         return (
             <>
-
-                <form className='main-form' method='post'>
+                <form className='main-form'>
                     <BrowserRouter>
                         <Switch>
                             <Route path='/login' component={LoginPage}/>

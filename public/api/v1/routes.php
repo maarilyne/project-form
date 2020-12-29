@@ -65,4 +65,14 @@ $app->post('/inscription', function (Request $request, Response $response) {
   $response->getBody()->write(json_encode(true));
 });
 
+$app->get('/logout', function (Request $request, Response $response) {
+    $isLoggedOut = true;
+    $logoutClass = new LoginRoute();
+    $logOut = $logoutClass ->logout();
+    if(!$logOut){
+        $isLoggedOut = false;
+    }
+    $response->getBody()->write($isLoggedOut);
+});
+
 $app->run();
