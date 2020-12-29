@@ -18,12 +18,12 @@ $mainCss = $bundleLoader->getBundle('main.css');
 $loginRoute = new LoginRoute();
 if ($loginRoute->getData() !== null) {
     $loggedVar = 'true';
-} else {
+} //else {
     $loggedVar = 'false';
-}
+//}
 //$loginRoute->logout();
 //session_destroy();
-
+//$loggedVar = 'false';
 ob_end_clean();
 ?>
 

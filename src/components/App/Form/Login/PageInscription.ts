@@ -1,3 +1,4 @@
+import {LoadComponent} from '../../../../index';
 import {IDataUser} from './InscriptionPageComponents';
 
 export class PageInscription {
@@ -5,7 +6,7 @@ export class PageInscription {
     const headers = new Headers();
     headers.set('Content-Type', 'application/json');
 
-    fetch('/api/v1/inscription', {
+    fetch('api/v1/inscription', {
       method: 'POST',
       headers,
       body: JSON.stringify(login),
@@ -18,6 +19,9 @@ export class PageInscription {
         (result) => {
           // tslint:disable-next-line:no-console
           console.log(result);
+
+          // window.location.href = 'jjj';
+          // LoadComponent.load(XXX);
         },
         (error: TypeError) => {
           // tslint:disable-next-line:no-console

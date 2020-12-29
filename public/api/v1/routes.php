@@ -53,7 +53,16 @@ $app->post('/login', function (Request $request, Response $response) {
 });
 
 $app->get('/inscription', function (Request $request, Response $response, array $args) {
+  $routeClass = new RegisterRoute();
+  $retrievedData = $routeClass->getData();
+  $response->getBody()->write(json_encode($retrievedData));
+});
 
+$app->post('/inscription', function (Request $request, Response $response) {
+  $reqData = $request->getParsedBody();
+  $registerClass = new RegisterRoute();
+  $registerClass->setData($reqData);
+  $response->getBody()->write(json_encode(true));
 });
 
 $app->run();
