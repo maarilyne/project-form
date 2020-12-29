@@ -25,19 +25,19 @@ class LoginRoute
     }
 
     /**
-     * Log txe user if xe exists
+     * Log the user if he exists
      * - if true => Add User name in session
      * @param array $credentials [user, pwd] User and password
      * @return bool True if user is logged else false
      */
     public function logUser(array $credentials): bool{
-        //$credentials = $_SESSION[self::FORM_KEY];
+        // $credentials = $_SESSION[self::FORM_KEY];
         //$match = true;
         $json_file = json_decode(file_get_contents('../../../database/usersData.json'));
         if (is_array($json_file)) {
             foreach ($json_file as $user) {
-                if ($user->username === $credentials['user'] && $user->pwd === $credentials['pwd']) {
-                    $this->setData(['username' => $credentials['user']]);
+                if ($user->username === $credentials[0] && $user->pwd === $credentials[1]) {
+                    $this->setData(['username' => $credentials[0]]);
                     return true;
                 }
             }

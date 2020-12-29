@@ -30,8 +30,7 @@ if (window.isLogged) {
     LoadComponent.load(InputFields);
     // ReactDOM.render(<App/>, document.querySelector('#root'));
 } else {
-    LoadComponent.load(InscriptionPageComponents);
+        LoadComponent.load(LoginPage);
+    //LoadComponent.load(InscriptionPageComponents);
     // ReactDOM.render(<LoginPage/>, document.querySelector('#root'));
-    // testest
-    // test2
 }

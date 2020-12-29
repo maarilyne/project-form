@@ -1,5 +1,4 @@
 import React, {createRef, MutableRefObject, useState} from 'react';
-import NavBar from './navBar-component';
 import NumberField from './NumberField/numberField-component';
 import TextField from './TextField/textField-component';
 import InvalidInput from './ErrMessages/errorMssgs-component';
@@ -145,7 +144,7 @@ const InputFields: React.FC<InputParams> = ({id, className, name}: InputParams):
                 }
                 <button name='sendData' type='submit' className="btns submitBtn" onClick={onclick}>Send</button>
             </form>
-            <NavBar/>
+            <a href='/api/v1/logout'>Logout</a>
         </>
     )
 }
