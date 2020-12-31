@@ -23,7 +23,7 @@ const sendData = (data: Array<any>): void => {
     const headers = new Headers();
     headers.set('Content-Type', 'application/json');
 
-    fetch('/api/v1/login', {
+    fetch('api/v1/login', {
         method: 'POST',
         headers,
         body: JSON.stringify(data),

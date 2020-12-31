@@ -11,26 +11,26 @@ use stdClass;
 class RegisterRoute{
     private const FORM_KEY = 'form';
 
-    /**
-     * Generates a json file that saves the user's data
-     */
-    public function generateJsonFile(array $myarr) {
-        $currentJSON = json_decode(file_get_contents('../../../database/inscriptionData.json'));
+  /**
+   * Generates a json file that saves the user's data
+   * @param array $myarr
+   */
+    public function generateJsonFile(array $myarr): void {
+        $currentJSON = json_decode(file_get_contents('../../../database/usersData.json'));
         if (!$currentJSON) {
             $currentJSON = [];
         } else {
-          foreach($myarr as $value){
-            if ($currentJSON === $value['pseudo']){
-              echo 'error user already exist';
-              die;
+          foreach($currentJSON as $value) {
+            if ($value->pseudo === $myarr['pseudo']){
+              return;
             }
-            $myarr['pwd'] = hash_hmac('sha256', $myarr['pwd'], file_get_contents("../../../database/pwdKey"));
-            $currentJSON[] = $myarr;
           }
         }
 
+        $myarr['pwd'] = hash_hmac('sha256', $myarr['pwd'], file_get_contents("../../../database/pwdKey"));
+        $currentJSON[] = $myarr;
         $json = json_encode($currentJSON);
-        file_put_contents("../../../database/inscriptionData.json", $json);
+        file_put_contents("../../../database/usersData.json", $json);
     }
 
     /**
