@@ -6,7 +6,7 @@ namespace React\Api;
 
 class LoginRoute
 {
-    private const FORM_KEY = 'form';
+    private const FORM_KEY = 'profileUser';
 
     /**
      * Get Saved Form Data
@@ -45,7 +45,10 @@ class LoginRoute
         return false;
     }
 
-    public function logout() {
+    public function logout(): bool {
         $this->setData(null);
+        session_destroy();
+        return $this->getData() === null;
+
     }
 }

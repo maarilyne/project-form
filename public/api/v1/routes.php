@@ -37,13 +37,6 @@ $app->post('/form', function (Request $request, Response $response) {
     $response->getBody()->write(json_encode(true));
 });
 
-//Retrieves all the data sent in /form url and displays it on this page
-/*$app->get('/login', function (Request $request, Response $response, array $args) {
-    $loginClass = new RegisterRoute();
-    $retrievedData = $loginClass->isMatching();
-    $response->getBody()->write(json_encode($retrievedData));
-});*/
-
 //Saves data sent in /form url, inside the $_SESSION variable
 $app->post('/login', function (Request $request, Response $response) {
     $reqData = $request->getParsedBody();
@@ -66,13 +59,11 @@ $app->post('/inscription', function (Request $request, Response $response) {
 });
 
 $app->get('/logout', function (Request $request, Response $response) {
-    $isLoggedOut = true;
     $logoutClass = new LoginRoute();
-    $logOut = $logoutClass ->logout();
-    if(!$logOut){
-        $isLoggedOut = false;
-    }
-    $response->getBody()->write($isLoggedOut);
+    $isLoggedOut = $logoutClass ->logout();
+    $response->getBody()->write(json_encode($isLoggedOut));
 });
+
+// sleep(3);
 
 $app->run();

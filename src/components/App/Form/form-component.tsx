@@ -67,6 +67,9 @@ const onclick = (e: any) => {
     }
 };
 
+const logoutClick = (e:any) => {
+    logoutResp();
+}
 /**
  * Save Form Data and send it to --> /api/v1/form
  * @param data
@@ -75,14 +78,12 @@ const saveData = (data: Array<any>) : void => {
     const headers = new Headers();
     headers.set('Content-Type', 'application/json');
 
-    fetch('/api/v1/login', {
+    fetch('/api/v1/form', {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(data)
     })
         .then((res) => {
-                //debugger;
-                //console.log(res);
                 return res.json();
             }
         )
@@ -120,6 +121,29 @@ const getData = () : void => {
 };
 //getData();
 
+
+const logoutResp = () : void => {
+    fetch('/api/v1/logout', {
+        method: 'GET',
+        headers: new Headers()
+    })
+        .then((res) => {
+                return res.json();
+            }
+        )
+        .then(
+            (result) => {
+                console.log('getData ' + result);
+                if(result){
+                    window.location.reload();
+                }
+            },
+            (error: TypeError) => {
+                console.log(error);
+            }
+        );
+};
+
 //Array that will store the inputRefs
 const a: Array<any> = [];
 
@@ -144,7 +168,7 @@ const InputFields: React.FC<InputParams> = ({id, className, name}: InputParams):
                 }
                 <button name='sendData' type='submit' className="btns submitBtn" onClick={onclick}>Send</button>
             </form>
-            <a href='/api/v1/logout'>Logout</a>
+            <button className='btns' onClick={logoutClick}>Logout</button>
         </>
     )
 }
