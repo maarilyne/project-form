@@ -1,4 +1,4 @@
-import InputFieldController from "../InputField/inputField-controller";
+import InputFieldController from '../InputField/inputField-controller';
 
 export default class TextFieldController extends InputFieldController{
 

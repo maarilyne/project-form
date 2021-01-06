@@ -1,4 +1,3 @@
-import {LoadComponent} from '../../../../index';
 import {IDataUser} from './InscriptionPageComponents';
 
 export class PageInscription {
@@ -21,7 +20,7 @@ export class PageInscription {
           console.log(result);
 
           // window.location.href = 'jjj';
-          // LoadComponent.load(XXX);
+          //LoadComponent.load(XXX);
         },
         (error: TypeError) => {
           // tslint:disable-next-line:no-console

@@ -45,10 +45,19 @@ class LoginRoute
         return false;
     }
 
+    /**
+     * Déconnecte l'utilisateur
+     * - Vide $_SESSION
+     * - Détruit le fichier de session
+     * Si l'utilisateur n'est pas connecté la fonction retourne false
+     * @return bool
+     */
     public function logout(): bool {
-        $this->setData(null);
+        if ($this->getData() === null) {
+            return false;
+        }
+        // $_SESSION = [];
         session_destroy();
-        return $this->getData() === null;
-
+        return true;
     }
 }

@@ -151,8 +151,8 @@ const a: Array<any> = [];
 const InputFields: React.FC<InputParams> = ({id, className, name}: InputParams): JSX.Element => {
     return (
         <>
-            <h2>Inscription</h2>
-            <form>
+            <h2>Add Profile</h2>
+            <form className='addUserForm'>
                 {
                     inputData.map((componentDef: InputFieldDefinition, index: number): JSX.Element => {
                         const Component: React.FC<InputParams> = fieldMap[componentDef.type];
@@ -167,8 +167,8 @@ const InputFields: React.FC<InputParams> = ({id, className, name}: InputParams):
                     })
                 }
                 <button name='sendData' type='submit' className="btns submitBtn" onClick={onclick}>Send</button>
+                <button className='btns logoutBtn' onClick={logoutClick}>Logout</button>
             </form>
-            <button className='btns' onClick={logoutClick}>Logout</button>
         </>
     )
 }

@@ -1,11 +1,6 @@
-import React, {createRef, MutableRefObject, useState} from 'react';
-import {LoadComponent} from '../../../../index';
-import InputFields from '../form-component';
-
-enum LoginInterface {
-    username = 'Username',
-    password = 'Password',
-}
+import React, {useState} from 'react';
+import LoadComponent from '../../load-component';
+import InscriptionPageComponents from './InscriptionPageComponents';
 
 // Sends data to --> /api/v1/login
 async function sendData(data: Array<any>, callback: () => void): Promise<void> {
@@ -31,6 +26,11 @@ async function sendData(data: Array<any>, callback: () => void): Promise<void> {
             },
         );
 }
+
+const switchPage = (e: any) => {
+    LoadComponent.load(InscriptionPageComponents);
+   // window.location.href = './InscriptionPageComponents.tsx';
+};
 
 const userName: string = 'Username';
 const password: string = 'Password';
@@ -98,7 +98,7 @@ const LoginPage: React.FC<any> = () => {
     return (
         <>
             <h2>Connexion</h2>
-            <form onSubmit={onsubmit}>
+            <form onSubmit={onsubmit} className='loginForm'>
                 <label htmlFor='username'>{userName}</label>
                 <input id='username' type='text' className='usernameInput' name='username' defaultValue={user}
                        onKeyDown={(e: any) => { loginKeyDown(e); }} onBlur={(e: any) => {setUser(e.target.value); }}/>
@@ -107,6 +107,7 @@ const LoginPage: React.FC<any> = () => {
                        onKeyDown={(e: any) => { pwdKeyDown(e); }} onBlur={(e: any) => {setPwd(e.target.value); }}/>
                 <button name='sendData' type='submit' className='btns logSubmitBtn'
                         disabled={submittingForm}>Login</button>
+                <button name='inscription' className='btns signUpBtn' onClick={switchPage}>Sign Up</button>
             </form>
         </>
     );

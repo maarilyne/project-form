@@ -1,5 +1,7 @@
 // @ts-ignore
 import React, {useState} from 'react';
+import LoadComponent from '../../load-component';
+import LoginPage from './loginPage-components';
 import {PageInscription} from './PageInscription';
 
 export interface IDataUser {
@@ -23,6 +25,10 @@ export const InscriptionPageComponents = (): JSX.Element => {
     pageInscription.signIn(dataUser);
   }
 
+  const switchPage = (e: any) => {
+        LoadComponent.load(LoginPage);
+    };
+
   return (
     <form>
       <label htmlFor='pseudo'>Pseudo</label>
@@ -32,6 +38,9 @@ export const InscriptionPageComponents = (): JSX.Element => {
       <input id='password' name='password' type='password' title='password' defaultValue={loginPwd}
              onBlur={(event: any) => {setLoginPwd(event.target.value); }} placeholder='Votre mot de passe...'/>
       <button type='button' onClick={onclick} value='save'>Envoyer</button>
+      <button name='inscription' className='btns signInBtn' onClick={switchPage}>Sign In</button>
+
     </form>
   );
 };
+export default InscriptionPageComponents;

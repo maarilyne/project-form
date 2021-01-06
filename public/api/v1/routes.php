@@ -60,7 +60,7 @@ $app->post('/inscription', function (Request $request, Response $response) {
 
 $app->get('/logout', function (Request $request, Response $response) {
     $logoutClass = new LoginRoute();
-    $isLoggedOut = $logoutClass ->logout();
+    $isLoggedOut = $logoutClass->logout();
     $response->getBody()->write(json_encode($isLoggedOut));
 });
 

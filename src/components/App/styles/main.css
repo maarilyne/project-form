@@ -29,7 +29,7 @@ form a.btns, form button.btns{
     cursor: pointer;
 }
 
-form button.logSubmitBtn{
+form.loginForm > input[type='text'], form.loginForm > input[type='password']{
     display: block;
 }
 form label{
