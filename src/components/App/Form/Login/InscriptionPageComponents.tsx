@@ -27,7 +27,7 @@ export const InscriptionPageComponents = (): JSX.Element => {
 
   const switchPage = (e: any) => {
         LoadComponent.load(LoginPage);
-    };
+  };
 
   return (
     <form>

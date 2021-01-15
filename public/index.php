@@ -36,11 +36,13 @@ ob_end_clean();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Formulaire dynamique</title>
   </head>
-  <body>
+  </div>
       <header>
           <h1>Projet 1 - Formulaire React</h1>
       </header>
     <div id="root"></div>
+<!-- Div permettant d'afficher le component correspondant au panel color picker -->
+    <div id="sideComponent"></div>
     <footer></footer>
     <script>window.isLogged = <?php echo $loggedVar ?>;</script>
     <script src="<?php echo $mainJs; ?>"></script>

@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import LoadComponent from '../../load-component';
 import InscriptionPageComponents from './InscriptionPageComponents';
+import SaveColorBtnComponent from './SaveColorBtnComponent';
 
 // Sends data to --> /api/v1/login
 async function sendData(data: Array<any>, callback: () => void): Promise<void> {
 // const sendData = (data: Array<any>, callback: () => void): void => {
     const headers = new Headers();
     headers.set('Content-Type', 'application/json');
-    await fetch('/api/v1/login', {
+    await fetch('api/v1/login', {
         method: 'POST',
         headers,
         body: JSON.stringify(data),
@@ -18,18 +19,28 @@ async function sendData(data: Array<any>, callback: () => void): Promise<void> {
         )
         .then(
             (result) => {
-                console.log('setData ' + result);
+                // console.log('setData ' + result);
+              if (result) {
                 window.location.reload();
+              }
             },
             (error: TypeError) => {
-                console.log(error);
+                // console.log(error);
             },
         );
 }
 
 const switchPage = (e: any) => {
     LoadComponent.load(InscriptionPageComponents);
-   // window.location.href = './InscriptionPageComponents.tsx';
+};
+
+/**
+ *
+ *
+ * @param e
+ */
+const switchPageColor = (e: any) => {
+  LoadComponent.loadSideComponent(SaveColorBtnComponent);
 };
 
 const userName: string = 'Username';
@@ -56,11 +67,11 @@ const LoginPage: React.FC<any> = () => {
         }
         setSubmittingForm(true); // Block submit while processing
         await sendData([user, pwd], () => {
-            console.log('callback');
+            // console.log('callback');
             // setSubmittingForm(false); // unblock submit process
         });
         setSubmittingForm(false); // unblock submit process
-        console.log('fin onsubmit');
+        // console.log('fin onsubmit');
     }
 
     /**
@@ -108,6 +119,7 @@ const LoginPage: React.FC<any> = () => {
                 <button name='sendData' type='submit' className='btns logSubmitBtn'
                         disabled={submittingForm}>Login</button>
                 <button name='inscription' className='btns signUpBtn' onClick={switchPage}>Sign Up</button>
+                <button name='color' className='btns signUpBtn' onClick={switchPageColor}>Save Color Page</button>
             </form>
         </>
     );

@@ -18,4 +18,12 @@ export default class LoadComponent {
     public static loadWithProps(Component: FC<any>, props: Array<InputParams>): void {
         ReactDOM.render(<Component />, document.querySelector('#root'));
     }
+
+  /**
+   * Load the panel color picker on div #sideComponent
+   * @param Component
+   */
+  public static loadSideComponent(Component: FC<any>): void {
+      ReactDOM.render(<Component />, document.querySelector('#sideComponent'));
+  }
 }

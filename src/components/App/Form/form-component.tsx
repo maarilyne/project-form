@@ -78,7 +78,7 @@ const saveData = (data: Array<any>) : void => {
     const headers = new Headers();
     headers.set('Content-Type', 'application/json');
 
-    fetch('/api/v1/form', {
+    fetch('api/v1/form', {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(data)
@@ -102,7 +102,7 @@ const saveData = (data: Array<any>) : void => {
  * @param data
  */
 const getData = () : void => {
-    fetch('/api/v1/form', {
+    fetch('api/v1/form', {
         method: 'GET',
         headers: new Headers()
     })
@@ -121,9 +121,8 @@ const getData = () : void => {
 };
 //getData();
 
-
-const logoutResp = () : void => {
-    fetch('/api/v1/logout', {
+const logoutResp = (): void => {
+    fetch('api/v1/logout', {
         method: 'GET',
         headers: new Headers()
     })
@@ -134,7 +133,7 @@ const logoutResp = () : void => {
         .then(
             (result) => {
                 console.log('getData ' + result);
-                if(result){
+                if (result) {
                     window.location.reload();
                 }
             },
