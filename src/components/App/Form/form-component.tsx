@@ -1,7 +1,11 @@
 import React, {createRef, MutableRefObject, useState} from 'react';
+import ElementSelector from '../ElemSelector/elemSelector-component';
 import NumberField from './NumberField/numberField-component';
 import TextField from './TextField/textField-component';
 import InvalidInput from './ErrMessages/errorMssgs-component';
+import LoadComponent from '../load-component';
+import SaveColorBtnComponent from './Login/SaveColorBtnComponent';
+import PanelColor from '../PanelColor/panelColor-component';
 
 enum ITypeEnum {
     text = 'text',
@@ -58,10 +62,8 @@ const onclick = (e: any) => {
     });
     console.log(formIsValid);
 
-    /**
-     * If each input values are valid, we can POST the data via fetch API
-     * On convertit le tableau postData en objet car le JSON (et donc le fetch API) ne supporte pas les tableaux associatifs.
-    */
+    // If each input values are valid, we can POST the data via fetch API
+    // On convertit le tableau postData en objet car le JSON (et donc le fetch API) ne supporte pas les tableaux associatifs.
     if (formIsValid) {
         saveData(postData);
     }
@@ -168,6 +170,7 @@ const InputFields: React.FC<InputParams> = ({id, className, name}: InputParams):
                 <button name='sendData' type='submit' className="btns submitBtn" onClick={onclick}>Send</button>
                 <button className='btns logoutBtn' onClick={logoutClick}>Logout</button>
             </form>
+            <ElementSelector/>
         </>
     )
 }

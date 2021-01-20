@@ -1,7 +1,9 @@
 import React from 'react';
+import ElementSelector from './components/App/ElemSelector/elemSelector-component';
 import InputFields from './components/App/Form/form-component';
 import LoginPage from './components/App/Form/Login/loginPage-components';
 import LoadComponent from './components/App/load-component';
+
 import './components/App/styles/main.css';
 
 declare var window: any;

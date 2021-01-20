@@ -34,14 +34,7 @@ const switchPage = (e: any) => {
     LoadComponent.load(InscriptionPageComponents);
 };
 
-/**
- *
- *
- * @param e
- */
-const switchPageColor = (e: any) => {
-  LoadComponent.loadSideComponent(SaveColorBtnComponent);
-};
+
 
 const userName: string = 'Username';
 const password: string = 'Password';
@@ -67,8 +60,7 @@ const LoginPage: React.FC<any> = () => {
         }
         setSubmittingForm(true); // Block submit while processing
         await sendData([user, pwd], () => {
-            // console.log('callback');
-            // setSubmittingForm(false); // unblock submit process
+            /* do nothing */
         });
         setSubmittingForm(false); // unblock submit process
         // console.log('fin onsubmit');
@@ -119,7 +111,6 @@ const LoginPage: React.FC<any> = () => {
                 <button name='sendData' type='submit' className='btns logSubmitBtn'
                         disabled={submittingForm}>Login</button>
                 <button name='inscription' className='btns signUpBtn' onClick={switchPage}>Sign Up</button>
-                <button name='color' className='btns signUpBtn' onClick={switchPageColor}>Save Color Page</button>
             </form>
         </>
     );

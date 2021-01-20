@@ -86,6 +86,6 @@ $app->post('/savecolor', function (Request $request, Response $response) {
   writeResponse($response, json_encode(true));
 });
 
-// sleep(3);
+// sleep(8);
 
 $app->run();
