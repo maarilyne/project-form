@@ -94,3 +94,8 @@ form#elemListForm > button.btnsEl{
     width: 50px;
     margin-left: 15px ;
 }
+
+/* Color picker's preview style */
+.current{
+
+}
