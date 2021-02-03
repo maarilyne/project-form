@@ -26,4 +26,8 @@ export default class LoadComponent {
   public static loadSideComponent(Component: FC<any>): void {
       ReactDOM.render(<Component />, document.querySelector('#sideComponent'));
   }
+
+    public static loadSideComponentWProps(Component: FC<any>, props: Array<any>): void {
+        ReactDOM.render(<Component />, document.querySelector('#sideComponent'));
+    }
 }
