@@ -26,10 +26,11 @@ export const SaveColorBtnComponent = (): JSX.Element => {
     saveColor.save(objCustomCSS);
   }
 
+  // @ts-ignore
   return (
     <form>
-      <label htmlFor='save'>Sauvegarder la couleur</label>
-      <button type='button' onClick={onclick} value='save'>Sauvegarder</button>
+      {/*<label htmlFor='save'>Sauvegarder la couleur</label>*/}
+      <button className='btns signUpBtn' type='button' onClick={onclick} value='save'>Sauvegarder</button>
     </form>
   );
 };

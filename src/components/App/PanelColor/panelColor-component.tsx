@@ -1,7 +1,7 @@
 import React, {createRef, useEffect} from 'react';
 import Picker from 'vanilla-picker';
-import LoadComponent from '../load-component';
 import SaveColorBtnComponent from '../Form/Login/SaveColorBtnComponent';
+import LoadComponent from '../load-component';
 
 // Functional component that returns two color pickers in one panel
 const PanelColor: React.FC<any> = () => {
@@ -39,7 +39,8 @@ const PanelColor: React.FC<any> = () => {
             <div ref={colorPicker2Ref} className='colorpicker'><span>TEXT COLOR</span></div>
             <div className='panelBtns'>
                 <button>Save</button>
-                <button name='color' className='btns signUpBtn' onClick={switchPageColor}>Save Color Page</button>
+                {/*<button name='color' className='btns signUpBtn' onClick={switchPageColor}>Save Color Page</button>*/}
+                <SaveColorBtnComponent />
                 <button onClick={closePanel}>Cancel</button>
             </div>
         </div>
