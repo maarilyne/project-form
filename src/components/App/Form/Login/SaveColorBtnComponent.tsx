@@ -1,6 +1,7 @@
 // @ts-ignore
 import React, {useState} from 'react';
 import {SaveColor} from './SaveColor';
+import ColorParams from '../../PanelColor/ColorParams';
 
 export interface IColor {
   textColor: string;
@@ -22,8 +23,9 @@ export const SaveColorBtnComponent = (): JSX.Element => {
       type : typeSelected,
     };
 
-    const saveColor = new SaveColor();
-    saveColor.save(objCustomCSS);
+    // Pattern singleton; On récupère une instance puis on appelle la méthode savecolor
+    const colorParams: ColorParams = ColorParams.getInstance();
+    colorParams.saveColor(objCustomCSS);
   }
 
   return (

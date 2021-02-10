@@ -1,6 +1,7 @@
 import React from 'react';
 import InscriptionPageComponents from '../Form/Login/InscriptionPageComponents';
 import LoadComponent from '../load-component';
+import ColorParams from '../PanelColor/ColorParams';
 import PanelColor from '../PanelColor/panelColor-component';
 
 let panelIsLoaded = false;
@@ -23,6 +24,10 @@ const openPanel = (e: any) => {
                 item2.style.display = 'inline-block';
             });
         }
+
+
+        const colorPInstance = ColorParams.getInstance();
+        colorPInstance.setPreviewMode(true);
     });
 };
 

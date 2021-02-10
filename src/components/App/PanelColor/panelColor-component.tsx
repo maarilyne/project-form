@@ -1,7 +1,9 @@
 import React, {createRef, useEffect} from 'react';
 import Picker from 'vanilla-picker';
+import ElementSelector from '../ElemSelector/elemSelector-component';
 import SaveColorBtnComponent from '../Form/Login/SaveColorBtnComponent';
 import LoadComponent from '../load-component';
+import ColorParams from './ColorParams';
 
 /**
  * - Initializes a color picker with its options via the div's ref
@@ -11,6 +13,7 @@ import LoadComponent from '../load-component';
  * @param {HTMLElement} el, HTML Element linked to the color picker (used to initialize color picker component)
  * @param {string} color, Current(Default) Color
  */
+
 const createPicker = (el: HTMLElement, color: string, elTarget: any) => {
     new Picker({
         parent: el,
@@ -19,15 +22,13 @@ const createPicker = (el: HTMLElement, color: string, elTarget: any) => {
         editor: false,
         color,
         onChange(newColor) {
-            console.log(elTarget);
-            if (el.id === 'backgroud') {
-                document.querySelector(elTarget).style.backgroundColor = newColor.rgbaString;
-            } else if (el.id === 'text') {
-                document.querySelector(elTarget).style.color = newColor.rgbaString;
-            }
+            // console.log(elTarget);
+            const colorPInstance2 = ColorParams.getInstance();
+            // colorPInstance2.applyPreviewColor();
+
         },
     });
-}
+};
 
 // Functional component that returns two color pickers in one panel
 const PanelColor: React.FC<any> = ({elColorTarget}: any): JSX.Element => {

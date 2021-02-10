@@ -37,6 +37,7 @@ ob_end_clean();
     <title>Formulaire dynamique</title>
   </head>
   </div>
+  <body>
       <header>
           <h1>Projet 1 - Formulaire React</h1>
       </header>
