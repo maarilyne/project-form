@@ -11,13 +11,10 @@ const openPanel = (e: any) => {
         console.log(item.value);
         const elTarget = item.value;
 
-        // if (!panelIsLoaded) {
+      /**
+       * Charge le composant Panel Color (picker color)
+       */
         LoadComponent.loadSideComponentWProps(PanelColorComponent, { elColorTarget: elTarget });
-//            panelIsLoaded = true;
-/*        } else {
-            const panel = document.querySelectorAll('#panel-container');
-
-        }*/
     });
 };
 

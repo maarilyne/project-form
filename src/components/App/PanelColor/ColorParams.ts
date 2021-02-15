@@ -25,6 +25,10 @@ export default class ColorParams {
     this.applyColor();
   }
 
+  /**
+   * récupère les couleurs sélectionnées via le picker
+   * @param type
+   */
   public getColor(type: string): IColor {
     let color: IColor | null = null;
     this.colors.forEach((oldColor: IColor) => {
@@ -63,6 +67,10 @@ export default class ColorParams {
     this.saveColorIntoDatabase(color);
   }
 
+  /**
+   * Sauvegarde la couleur dans le fichier colorsData.json
+   * @param color
+   */
   private saveColorIntoDatabase = (color: IColor): void => {
     // Call server with this.colors
     const saveColor = new SaveColor();
@@ -78,10 +86,16 @@ export default class ColorParams {
     this.applyColor();
   }
 
+  /**
+   * Ouvre la preview
+   */
   public openPreviewMode = (): void => {
     this.setPreviewMode(true);
   }
 
+  /**
+   * Ferme la preview
+   */
   public closePreviewMode = (): void => {
     this.setPreviewMode(false);
   }
@@ -133,6 +147,10 @@ export default class ColorParams {
     }
   }
 
+  /**
+   * Applique le CSS sur le background et le texte
+   * @param color
+   */
   private getColorCssEntry = (color: IColor): string => {
     return `${color.type} {
                 background-color: ${color.backgroundColor};
