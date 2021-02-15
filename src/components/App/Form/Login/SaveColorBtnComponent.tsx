@@ -1,5 +1,6 @@
 // @ts-ignore
 import React, {useState} from 'react';
+import ColorParams from '../../PanelColor/ColorParams';
 import {SaveColor} from './SaveColor';
 
 export interface IColor {
@@ -15,22 +16,19 @@ export const SaveColorBtnComponent = (): JSX.Element => {
 
   function onclick(event: any): void {
     event.preventDefault();
-
     const objCustomCSS: IColor = {
       textColor,
       backgroundColor,
       type : typeSelected,
     };
-
-    const saveColor = new SaveColor();
-    saveColor.save(objCustomCSS);
+    // Pattern singleton; On récupère une instance puis on appelle la méthode savecolor
+    const colorParams: ColorParams = ColorParams.getInstance();
+    colorParams.saveColor(objCustomCSS);
   }
-
-  // @ts-ignore
   return (
     <form>
-      {/*<label htmlFor='save'>Sauvegarder la couleur</label>*/}
-      <button className='btns signUpBtn' type='button' onClick={onclick} value='save'>Sauvegarder</button>
+      <label htmlFor='save'>Sauvegarder la couleur</label>
+      <button type='button' onClick={onclick} value='save'>Sauvegarder</button>
     </form>
   );
 };

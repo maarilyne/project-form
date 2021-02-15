@@ -21,9 +21,12 @@
       "single"
     ],
     "member-ordering": [
-      true,
+      false,
       {
-        "order": "statics-first"
+        "order": [
+          "fields-first",
+          "statics-first"
+        ]
       }
     ],
     "object-literal-sort-keys": false,
