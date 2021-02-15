@@ -5,7 +5,7 @@ import TextField from './TextField/textField-component';
 import InvalidInput from './ErrMessages/errorMssgs-component';
 import LoadComponent from '../load-component';
 import SaveColorBtnComponent from './Login/SaveColorBtnComponent';
-import PanelColor from '../PanelColor/panelColor-component';
+import PanelColorComponent from '../PanelColor/panelColor-component';
 
 enum ITypeEnum {
     text = 'text',
@@ -152,19 +152,21 @@ const a: Array<any> = [];
 const InputFields: React.FC<InputParams> = ({id, className, name}: InputParams): JSX.Element => {
     return (
         <>
-            <h2>Add Profile</h2>
-            <form className='addUserForm'>
+            <h2 className='title'>Add Profile</h2>
+            <form className='addUserForm formElement'>
                 {
                     inputData.map((componentDef: InputFieldDefinition, index: number): JSX.Element => {
                         const Component: React.FC<InputParams> = fieldMap[componentDef.type];
                         const inputRef: any = createRef();
                         a.push(inputRef);
 
+                        const classNames: string = `${componentDef.props.className} inputField`;
+
                         return (
                                 <Component key={index} ref={inputRef} id={componentDef.props.id}
-                                           className={componentDef.props.className} name={componentDef.props.name}
+                                           className={classNames} name={componentDef.props.name}
                                            value={componentDef.props.value}/>
-                        )
+                        );
                     })
                 }
                 <button name='sendData' type='submit' className="btns submitBtn" onClick={onclick}>Send</button>

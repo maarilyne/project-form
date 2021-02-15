@@ -17,9 +17,9 @@ $mainCss = $bundleLoader->getBundle('main.css');
 
 $loginRoute = new LoginRoute();
 if ($loginRoute->getData() !== null) {
-    $loggedVar = 'true';
+  $loggedVar = 'true';
 } else {
-    $loggedVar = 'false';
+  $loggedVar = 'false';
 }
 /*if($loginRoute->logout())
     session_destroy();
@@ -30,22 +30,31 @@ ob_end_clean();
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="<?php echo $mainCss; ?>"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Formulaire dynamique</title>
-  </head>
-  </div>
-  <body>
-      <header>
-          <h1>Projet 1 - Formulaire React</h1>
-      </header>
-    <div id="root"></div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="<?php echo $mainCss; ?>"/>
+  <title>Formulaire dynamique</title>
+  <style id="colors">
+    div#root input{
+      background: red;
+    }
+  </style>
+  <style id="preview">
+    div#root .preview input{
+      background: green;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Projet 1 - Formulaire React</h1>
+</header>
+<div id="root"></div>
 <!-- Div permettant d'afficher le component correspondant au panel color picker -->
-    <div id="sideComponent"></div>
-    <footer></footer>
-    <script>window.isLogged = <?php echo $loggedVar ?>;</script>
-    <script src="<?php echo $mainJs; ?>"></script>
-  </body>
+<div id="sideComponent"></div>
+<footer></footer>
+<script>window.isLogged = <?php echo $loggedVar ?>;</script>
+<script src="<?php echo $mainJs; ?>"></script>
+</body>
 </html>
