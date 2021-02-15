@@ -66,6 +66,12 @@ const PanelColorComponent: React.FC<any> = ({elColorTarget}: any): JSX.Element =
   );
 };
 
+/**
+ * Appelle la fonction SaveColor de ColorParams
+ * Sauvegarde les couleurs dans la database
+ * @param e
+ * @param colors
+ */
 const saveColor = (e: any, colors: IColor): void => {
   colorParams.saveColor(colors);
   closePanel(e);

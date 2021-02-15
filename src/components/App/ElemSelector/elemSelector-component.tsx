@@ -10,14 +10,11 @@ const openPanel = (e: any) => {
   formValue.forEach((item: any): void => {
     console.log(item.value);
     const elTarget = item.value;
-
-    // if (!panelIsLoaded) {
+      /**
+       * Charge le composant Panel Color (picker color)
+       */
     LoadComponent.loadSideComponentWProps(PanelColorComponent, { elColorTarget: elTarget });
-//            panelIsLoaded = true;
-    /*        } else {
-                const panel = document.querySelectorAll('#panel-container');
-            }*/
-  });
+    });
 };
 
 // Functional component that enables the user to select which element of the page will be edited
