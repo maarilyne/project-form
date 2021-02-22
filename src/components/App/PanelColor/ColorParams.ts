@@ -1,6 +1,11 @@
 import $ from 'jquery';
 import {SaveColor} from '../Form/Login/SaveColor';
-import {IColor} from '../Form/Login/SaveColorBtnComponent';
+
+export interface IColor {
+  textColor: string;
+  backgroundColor: string;
+  type: string;
+}
 
 export default class ColorParams {
   /**
@@ -16,13 +21,21 @@ export default class ColorParams {
   private static instance: ColorParams | null = null;
   private colors: Array<IColor> = [];
   private previewColors: IColor | null  = null;
+
   /**
    * Set User Colors
    * @param colors
    */
-  public initColors = (colors: Array<IColor>): void => {
-    this.colors = colors;
-    this.applyColor();
+  public initColors(colors: Array<IColor>): void {
+      this.colors = colors;
+      this.applyColor();
+  }
+
+  public getInitColors(): void {
+    const serverColor = new SaveColor();
+    serverColor.getDataColors((colors: Array<IColor>): void => {
+      this.initColors(colors);
+    });
   }
 
   /**
@@ -30,32 +43,44 @@ export default class ColorParams {
    * @param type
    */
   public getColor(type: string): IColor {
-    let color: IColor | null = null;
-    this.colors.forEach((oldColor: IColor) => {
-      if (oldColor.type === type) {
-        color = oldColor;
+    /*let colorObject: IColor | null = null;
+
+    this.colors.forEach((oldColorObject: IColor) => {
+      if (oldColorObject.type === type) {
+        colorObject = oldColorObject;
       }
     });
-
-    if (color === null) {
-      color = {
+    if (colorObject === null) {
+      colorObject = {
         type,
-        backgroundColor: '',
-        textColor: '',
+        backgroundColor: 'white',
+        textColor: 'black',
       };
     }
+    return colorObject;
+    */
 
-    return color;
+    for (const key in this.colors) {
+      if (this.colors[key].type === type) {
+        return this.colors[key];
+      }
+    }
+
+    return {
+      type,
+      backgroundColor: 'white',
+      textColor: 'black',
+    };
   }
 
   /**
    * Get colors changed by user
    * - Apply new colors in CSS part
    * - Send new colors to server (only changed object is sent)
+   * Adds / Replaces type in "colors"
    * @param color
    */
   public saveColor(color: IColor): void {
-    // Add / Replace type dans colors
     const newColors: Array<IColor> = [];
     newColors.push(color);
     this.colors.forEach((oldColor: IColor) => {
@@ -68,20 +93,23 @@ export default class ColorParams {
   }
 
   /**
-   * Sauvegarde la couleur dans le fichier colorsData.json
+   * Saves the colors in the file colorsData.json
+   * Sends the colors to be saved to the server by calling the object 'SaveColor'
    * @param color
+   * @private
    */
   private saveColorIntoDatabase = (color: IColor): void => {
-    // Call server with this.colors
     const saveColor = new SaveColor();
     saveColor.save(color);
   }
 
   /**
    * Apply a preview color
+   * - Force preview mode before applying preview colors
    * @param color
    */
   public applyPreviewColor = (color: IColor): void => {
+    this.openPreviewMode();
     this.previewColors = color;
     this.applyColor();
   }
@@ -130,6 +158,8 @@ export default class ColorParams {
   }
   /**
    * Apply User colors
+   * If a style tag with an id called 'colors' exists : we apply the colors inside the CSS style of this tag
+   * If a style tag with an id called 'preview_colors' exists: we apply the colors inside the CSS style of this tag
    * @private
    */
   private applyColor = (): void => {
@@ -139,7 +169,6 @@ export default class ColorParams {
       styleContent += this.getColorCssEntry(color);
     });
     colorStyle.html(styleContent);
-    // If .preview exists
     if (this.previewColors) {
       const previewColorStyle = this.getColorStyleTag('preview_colors');
       styleContent = `.preview ${this.getColorCssEntry(this.previewColors)}`;
@@ -149,12 +178,13 @@ export default class ColorParams {
 
   /**
    * Applique le CSS sur le background et le texte
-   * @param color
+   * @param colorsPattern : objet contenant les infos au type édité (couleurs du texte et du fond...)
+   * @private
    */
-  private getColorCssEntry = (color: IColor): string => {
-    return `${color.type} {
-                background-color: ${color.backgroundColor};
-                color: ${color.textColor};
+  private getColorCssEntry = (colorsPattern: IColor): string => {
+    return `${colorsPattern.type} {
+                background-color: ${colorsPattern.backgroundColor};
+                color: ${colorsPattern.textColor};
             }`;
   }
 }

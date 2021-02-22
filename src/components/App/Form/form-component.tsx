@@ -1,10 +1,10 @@
 import React, {createRef, MutableRefObject, useState} from 'react';
+import ColorParams from '../PanelColor/ColorParams';
 import ElementSelector from '../ElemSelector/elemSelector-component';
 import NumberField from './NumberField/numberField-component';
 import TextField from './TextField/textField-component';
 import InvalidInput from './ErrMessages/errorMssgs-component';
 import LoadComponent from '../load-component';
-import SaveColorBtnComponent from './Login/SaveColorBtnComponent';
 import PanelColorComponent from '../PanelColor/panelColor-component';
 
 enum ITypeEnum {
@@ -121,7 +121,6 @@ const getData = () : void => {
             }
         );
 };
-//getData();
 
 const logoutResp = (): void => {
     fetch('api/v1/logout', {
@@ -145,11 +144,16 @@ const logoutResp = (): void => {
         );
 };
 
+//Check / Apply initial colors
+
 //Array that will store the inputRefs
 const a: Array<any> = [];
 
 //Functional component that returns the form's inputs & calls the navigation bar
 const InputFields: React.FC<InputParams> = ({id, className, name}: InputParams): JSX.Element => {
+    const colorParams = new ColorParams();
+    colorParams.getInitColors();
+
     return (
         <>
             <h2 className='title'>Add Profile</h2>

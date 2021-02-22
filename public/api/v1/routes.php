@@ -81,11 +81,16 @@ $app->get('/logout', function (Request $request, Response $response) {
  */
 $app->post('/savecolor', function (Request $request, Response $response) {
   $reqData = $request->getParsedBody();
-  $registerClass = new SaveColorRoute();
-  $registerClass->setData($reqData);
+  $saveColorClass = new SaveColorRoute();
+  $saveColorClass->setData($reqData);
   writeResponse($response, json_encode(true));
 });
 
+$app->get('/getcolor', function (Request $request, Response $response) {
+    $saveColorClass = new SaveColorRoute();
+    $retrieveColor = $saveColorClass->getData();
+    writeResponse($response, json_encode($retrieveColor));
+});
 // sleep(8);
 
 $app->run();

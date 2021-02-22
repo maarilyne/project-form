@@ -10,7 +10,6 @@ use stdClass;
  */
 class SaveColorRoute{
   private const FORM_KEY = 'form';
-
   /**
    * Generates a json file that saves the user's color data
    * - Get previous values
@@ -41,8 +40,15 @@ class SaveColorRoute{
    * Get Saved Form Data
    * @return ?array
    */
-  public function getData(): ?array {
-    return !empty($_SESSION[self::FORM_KEY]) ? $_SESSION[self::FORM_KEY] : null;
+  public function getData(): array {
+      $currentJSON = json_decode(file_get_contents('../../../database/colorsData.json'));
+      if (is_array($currentJSON)) {
+          return $currentJSON;
+      }
+      return [];
+      // var_dump($_SESSION[self::FORM_KEY]);exit;
+    //return !empty($_SESSION[self::FORM_KEY]) ? $_SESSION[self::FORM_KEY] : [];
+
   }
 
   /**

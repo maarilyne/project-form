@@ -35,16 +35,6 @@ ob_end_clean();
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="<?php echo $mainCss; ?>"/>
   <title>Formulaire dynamique</title>
-  <style id="colors">
-    div#root input{
-      background: red;
-    }
-  </style>
-  <style id="preview">
-    div#root .preview input{
-      background: green;
-    }
-  </style>
 </head>
 <body>
 <header>

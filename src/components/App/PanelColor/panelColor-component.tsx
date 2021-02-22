@@ -1,10 +1,8 @@
 import React, {createRef, useEffect} from 'react';
 import Picker from 'vanilla-picker';
-import SaveColorBtnComponent, {IColor} from '../Form/Login/SaveColorBtnComponent';
 import LoadComponent from '../load-component';
 // tslint:disable-next-line:import-spacing
-import ColorParams from  '../PanelColor/ColorParams';
-import ClickEvent = JQuery.ClickEvent;
+import ColorParams, {IColor} from '../PanelColor/ColorParams';
 
 /**
  * - Initializes a color picker with its options via the div's ref
@@ -17,54 +15,69 @@ import ClickEvent = JQuery.ClickEvent;
 
 const colorParams: ColorParams = ColorParams.getInstance();
 
-const createPicker = (el: HTMLElement, colors: IColor) => {
-  let color: string = '';
-  if (el.id === 'background') {
-    color = colors.backgroundColor;
-  } else if (el.id === 'text') {
-    color = colors.textColor;
-  }
-  new Picker({
-    parent: el,
-    popup: false,
-    alpha: false,
-    editor: false,
-    color,
-    onChange(newColor) {
-      if (el.id === 'background') {
-        colors.backgroundColor = newColor.rgbaString;
-      } else if (el.id === 'text') {
-        colors.textColor = newColor.rgbaString;
-      }
-      colorParams.applyPreviewColor(colors);
-    },
-  });
+const createPicker = (elem: HTMLElement, colorShowed: IColor) => {
+    let color: string = '';
+    if (elem.id === 'background') {
+        color = colorShowed.backgroundColor;
+    } else if (elem.id === 'text') {
+        color = colorShowed.textColor;
+    }
+    new Picker({
+        parent: elem,
+        popup: false,
+        alpha: false,
+        editor: false,
+        color,
+        onChange(newColor) {
+            if (elem.id === 'background') {
+                colorShowed.backgroundColor = newColor.rgbaString;
+            } else if (elem.id === 'text') {
+                colorShowed.textColor = newColor.rgbaString;
+            }
+            colorParams.applyPreviewColor(colorShowed);
+        },
+    });
 };
 
-// Functional component that returns two color pickers in one panel
-const PanelColorComponent: React.FC<any> = ({elColorTarget}: any): JSX.Element => {
-  const colors: IColor = colorParams.getColor(elColorTarget);
-  const colorPicker1Ref: any = createRef();
-  const colorPicker2Ref: any = createRef();
+/**
+ * Interface des propriétés du composant PanelColorComponent
+ * Sécurise l'utilisation des propriétés du composant
+ * => en cas d'erreur, le transpiler génère une erreur
+ */
+export interface IPanelColorComponentProps {
+    elemType: string;
+}
 
-  // This useEffect hook triggers the following code everytime the page is loaded
-  useEffect(() => {
-    createPicker(colorPicker1Ref.current, colors);
-    createPicker(colorPicker2Ref.current, colors);
-  }, []);
+/**
+ * Functional component that returns two color pickers in one panel
+ * Au demarrage, on charge les deux color pickers
+ * The useEffect hook triggers the following code everytime the page is loaded
+ */
+const PanelColorComponent: React.FC<IPanelColorComponentProps> =
+    ({elemType}: IPanelColorComponentProps): JSX.Element => {
+        const colorShowed: IColor = colorParams.getColor(elemType);
+        const colorPicker1Ref: any = createRef();
+        const colorPicker2Ref: any = createRef();
 
-  return (
-    <div id='panel-container'>
-      <div ref={colorPicker1Ref} id='background' className='colorpicker'><span>BACKGROUND COLOR</span></div>
-      <div ref={colorPicker2Ref} id='text' className='colorpicker'><span>TEXT COLOR</span></div>
-      <div className='panelBtns'>
-        <button onClick={(e: any) => { saveColor(e, colors); }}>Save</button>
-        {/*<button name='color' className='btns signUpBtn' onClick={switchPageColor}>Save Color Page</button>*/}
-        <button onClick={closePanel}>Cancel</button>
-      </div>
-    </div>
-  );
-};
+        useEffect(() => {
+            createPicker(colorPicker1Ref.current, colorShowed);
+            createPicker(colorPicker2Ref.current, colorShowed);
+        }, []);
+
+        return (
+            <div id='panel-container'>
+                <div ref={colorPicker1Ref} id='background' className='colorpicker'><span>BACKGROUND COLOR</span></div>
+                <div ref={colorPicker2Ref} id='text' className='colorpicker'><span>TEXT COLOR</span></div>
+                <div className='panelBtns'>
+                    <button onClick={(e: any) => {
+                        saveColor(e, colorShowed);
+                    }}>Save
+                    </button>
+                    <button onClick={closePanel}>Cancel</button>
+                </div>
+            </div>
+        );
+    };
 
 /**
  * Appelle la fonction SaveColor de ColorParams
@@ -72,16 +85,16 @@ const PanelColorComponent: React.FC<any> = ({elColorTarget}: any): JSX.Element =
  * @param e
  * @param colors
  */
-const saveColor = (e: any, colors: IColor): void => {
-  colorParams.saveColor(colors);
-  closePanel(e);
+const saveColor = (e: any, colorSaved: IColor): void => {
+    colorParams.saveColor(colorSaved);
+    closePanel(e);
 };
 
 // Closes the color picker panel when the user clicks on the Cancel btn
 const closePanel = (e: any) => {
-  e.preventDefault();
-  colorParams.closePreviewMode();
-  LoadComponent.unloadSideComponentWProps();
+    e.preventDefault();
+    colorParams.closePreviewMode();
+    LoadComponent.unloadSideComponentWProps();
 };
 
 export default PanelColorComponent;

@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import LoadComponent from '../../load-component';
 import InscriptionPageComponents from './InscriptionPageComponents';
-import SaveColorBtnComponent from './SaveColorBtnComponent';
 
 // Sends data to --> /api/v1/login
 async function sendData(data: Array<any>, callback: () => void): Promise<void> {
@@ -33,8 +32,6 @@ async function sendData(data: Array<any>, callback: () => void): Promise<void> {
 const switchPage = (e: any) => {
     LoadComponent.load(InscriptionPageComponents);
 };
-
-
 
 const userName: string = 'Username';
 const password: string = 'Password';

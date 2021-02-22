@@ -1,6 +1,7 @@
 import React from 'react';
 import LoadComponent from '../load-component';
-import PanelColorComponent from '../PanelColor/panelColor-component';
+import PanelColorComponent, {IPanelColorComponentProps} from '../PanelColor/panelColor-component';
+
 
 // Opens the panel when the user clicks on the btn
 const openPanel = (e: any) => {
@@ -8,14 +9,15 @@ const openPanel = (e: any) => {
 
   const formValue = document.querySelectorAll('#pageElem');
   formValue.forEach((item: any): void => {
-    console.log(item.value);
+    // console.log(item.value);
     const elTarget = item.value;
       /**
        * Charge le composant Panel Color (picker color)
        */
-    LoadComponent.loadSideComponentWProps(PanelColorComponent, { elColorTarget: elTarget });
+    LoadComponent.loadSideComponentWProps(PanelColorComponent, { elemType: elTarget } as IPanelColorComponentProps);
     });
 };
+
 
 // Functional component that enables the user to select which element of the page will be edited
 const ElementSelector: React.FC<any> = () => {
