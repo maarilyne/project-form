@@ -32,8 +32,6 @@ class LoginRoute {
    * @return bool True if user is logged else false
    */
   public function logUser(array $credentials): bool {
-    // $credentials = $_SESSION[self::FORM_KEY];
-    //$match = true;
     $pwd = RegisterRoute::getPwdHashed($credentials[1]);
     $json_file = json_decode(file_get_contents('../../../database/usersData.json'));
     if (is_array($json_file)) {

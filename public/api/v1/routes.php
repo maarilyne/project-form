@@ -33,7 +33,7 @@ function writeResponse(Response $response, string $result): void {
 
 $app = new App();
 
-//Retrieves all the data sent in /form url and displays it on this page
+//Retrieves all form-component.tsx's data sent in /form url and displays it on this page
 $app->get('/form', function (Request $request, Response $response, array $args) {
   $routeClass = new RegisterRoute();
   $retrievedData = $routeClass->getData();
@@ -41,7 +41,7 @@ $app->get('/form', function (Request $request, Response $response, array $args) 
 });
 
 
-//Saves data sent in /form url, inside the $_SESSION variable
+//Saves form-component.tsx's data sent in /form url, inside the $_SESSION variable
 $app->post('/form', function (Request $request, Response $response) {
   $reqData = $request->getParsedBody();
   $registerClass = new RegisterRoute();
@@ -82,15 +82,28 @@ $app->get('/logout', function (Request $request, Response $response) {
 $app->post('/savecolor', function (Request $request, Response $response) {
   $reqData = $request->getParsedBody();
   $saveColorClass = new SaveColorRoute();
-  $saveColorClass->setData($reqData);
+  $loginClass = new LoginRoute();
+  $user = $loginClass->getData();
+  $saveColorClass->setData($reqData, $user);
+
   writeResponse($response, json_encode(true));
 });
 
+/**
+ * Route permettant de récupérer la couleur via SaveColorRoute
+ */
 $app->get('/getcolor', function (Request $request, Response $response) {
     $saveColorClass = new SaveColorRoute();
     $retrieveColor = $saveColorClass->getData();
     writeResponse($response, json_encode($retrieveColor));
 });
+
+$app->get('/hello', function (Request $request, Response $response) {
+    $loginClass = new LoginRoute();
+    $user = $loginClass->getData();
+    writeResponse($response, json_encode($user));
+});
+
 // sleep(8);
 
 $app->run();

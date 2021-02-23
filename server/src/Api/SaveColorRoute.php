@@ -19,15 +19,16 @@ class SaveColorRoute{
    * - save new array into colorsData.json
    * @param array $myarr
    */
-  public function generateJsonFile(array $myarr): void {
+  public function generateJsonFile(array $myarr, string $usernameObj): void {
     $currentJSON = json_decode(file_get_contents('../../../database/colorsData.json'));
     $newContentJson = [];
     $newContentJson[] = $myarr; // Stores new values
     if ($currentJSON !== false) {
       foreach ($currentJSON as $value) {
-        if ($value->type !== $myarr['type']) {
-          $newContentJson[] = $value; // keeps saved values
-        }
+          if($usernameObj['username'] = )
+            if ($value->type !== $myarr['type']) {
+              $newContentJson[] = $value; // keeps saved values
+            }
       }
     }
 
@@ -46,7 +47,7 @@ class SaveColorRoute{
           return $currentJSON;
       }
       return [];
-      // var_dump($_SESSION[self::FORM_KEY]);exit;
+    // var_dump($_SESSION[self::FORM_KEY]);exit;
     //return !empty($_SESSION[self::FORM_KEY]) ? $_SESSION[self::FORM_KEY] : [];
 
   }
@@ -55,8 +56,8 @@ class SaveColorRoute{
    * Save Form Data
    * @param array $data Form database
    */
-  public function setData(array $data): void {
+  public function setData(array $data, string $usernameObj): void {
     //$_SESSION[self::FORM_KEY] = $data;
-    $this->generateJsonFile($data);
+    $this->generateJsonFile($data, $usernameObj);
   }
 }
