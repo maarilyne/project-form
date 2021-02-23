@@ -1,6 +1,7 @@
 <?php
 //use FormComponents;
 namespace React\Api;
+use React\Interfaces\IUser;
 use stdClass;
 
 /**
@@ -22,13 +23,26 @@ class SaveColorRoute{
   public function generateJsonFile(array $myarr, string $usernameObj): void {
     $currentJSON = json_decode(file_get_contents('../../../database/colorsData.json'));
     $newContentJson = [];
-    $newContentJson[] = $myarr; // Stores new values
+
+    // Stores new values
+    $newContentJson = [
+        "user" => $usernameObj['username'],
+        "colors" => $myarr
+    ];
+
     if ($currentJSON !== false) {
       foreach ($currentJSON as $value) {
-          if($usernameObj['username'] = )
-            if ($value->type !== $myarr['type']) {
-              $newContentJson[] = $value; // keeps saved values
-            }
+          //Lorsque le user dans le fichier json est égale au username passé en params
+          if($value->user === $usernameObj['username']){
+              foreach ($value->colors as $colors)
+                  if ($colors->type !== $myarr['type']) {
+                      $newContentJson[] = $colors; // keeps saved values
+                  }
+          }
+          else {
+              /* Programme lorsque le user du fichier json n'est pas égale au user login passé en params */
+          }
+
       }
     }
 

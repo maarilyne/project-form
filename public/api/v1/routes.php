@@ -78,6 +78,7 @@ $app->get('/logout', function (Request $request, Response $response) {
 
 /**
  * Route permettant de sauvegarder la couleur via SaveColorRoute
+ * Récupère le username de l'utilisateur et l'envoit qui sera utilisé dans le generatejsonfile
  */
 $app->post('/savecolor', function (Request $request, Response $response) {
   $reqData = $request->getParsedBody();
@@ -98,11 +99,14 @@ $app->get('/getcolor', function (Request $request, Response $response) {
     writeResponse($response, json_encode($retrieveColor));
 });
 
+/* Route test
+ * Test de recupération de de username login
 $app->get('/hello', function (Request $request, Response $response) {
     $loginClass = new LoginRoute();
     $user = $loginClass->getData();
     writeResponse($response, json_encode($user));
 });
+*/
 
 // sleep(8);
 
