@@ -48,11 +48,7 @@ export class SaveColor {
         )
         .then(
             (result) => {
-                /*result.forEach((subArray: Array<IColor>) => {
-                    callback(subArray);
-                }*/
-                callback(result);
-
+              callback(result);
               console.log('The colors are:' + result);
             },
             (error: TypeError) => {

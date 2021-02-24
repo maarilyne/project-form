@@ -19,16 +19,15 @@ class SaveColorRoute{
    * - save new array into colorsData.json
    * @param array $myarr
    */
-  public function generateJsonFile(array $myarr, string $usernameObj): void {
+  public function generateJsonFile(array $myarr): void {
     $currentJSON = json_decode(file_get_contents('../../../database/colorsData.json'));
     $newContentJson = [];
     $newContentJson[] = $myarr; // Stores new values
     if ($currentJSON !== false) {
       foreach ($currentJSON as $value) {
-          if($usernameObj['username'] = )
-            if ($value->type !== $myarr['type']) {
-              $newContentJson[] = $value; // keeps saved values
-            }
+          if ($value->type !== $myarr['type']) {
+            $newContentJson[] = $value; // keeps saved values
+          }
       }
     }
 
