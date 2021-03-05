@@ -1,4 +1,4 @@
-import ColorParams, {IColor} from '../../PanelColor/ColorParams';
+import {IColor} from '../../PanelColor/ColorParams';
 
 type getColorCallbackType = (result: Array<IColor>) => void;
 
@@ -17,19 +17,7 @@ export class SaveColor {
       method: 'POST',
       headers,
       body: JSON.stringify(objCustomCSS),
-    })
-      .then((res) => {
-          return res.json();
-        },
-      )
-      .then(
-        (result) => {
-          // console.log(result);
-        },
-        (error: TypeError) => {
-          console.log(error);
-        },
-      );
+    }).then();
   }
 
   /**
@@ -49,12 +37,9 @@ export class SaveColor {
         .then(
             (result) => {
               callback(result);
-              console.log('The colors are:' + result);
             },
             (error: TypeError) => {
-              console.log(error);
             },
         );
   }
-
 }

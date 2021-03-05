@@ -1,6 +1,4 @@
 <?php
-/*echo 'api';
-var_dump($_SERVER);*/
 
 require '../../../vendor/autoload.php';
 
@@ -57,6 +55,9 @@ $app->post('/login', function (Request $request, Response $response) {
   writeResponse($response, json_encode($isLogged));
 });
 
+/**
+ * @ignore $request
+ */
 $app->get('/inscription', function (Request $request, Response $response, array $args) {
   $routeClass = new RegisterRoute();
   $retrievedData = $routeClass->getData();
@@ -78,15 +79,17 @@ $app->get('/logout', function (Request $request, Response $response) {
 
 /**
  * Route permettant de sauvegarder la couleur via SaveColorRoute
+ * Récupère le username de l'utilisateur et l'envoit qui sera utilisé dans le generatejsonfile
  */
 $app->post('/savecolor', function (Request $request, Response $response) {
   $reqData = $request->getParsedBody();
   $saveColorClass = new SaveColorRoute();
   $loginClass = new LoginRoute();
   $user = $loginClass->getData();
-  $saveColorClass->setData($reqData, $user);
-
-  writeResponse($response, json_encode(true));
+  if ($user !== null) {
+    $saveColorClass->setData($reqData, $user['username']);
+  }
+  writeResponse($response, json_encode($user !== null));
 });
 
 /**
@@ -97,13 +100,5 @@ $app->get('/getcolor', function (Request $request, Response $response) {
     $retrieveColor = $saveColorClass->getData();
     writeResponse($response, json_encode($retrieveColor));
 });
-
-$app->get('/hello', function (Request $request, Response $response) {
-    $loginClass = new LoginRoute();
-    $user = $loginClass->getData();
-    writeResponse($response, json_encode($user));
-});
-
-// sleep(8);
 
 $app->run();

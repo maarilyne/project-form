@@ -1,15 +1,17 @@
 <?php
-//use FormComponents;
+
 namespace React\Api;
-use stdClass;
+
+use React\Interfaces\IColorsUsers;
 
 /**
  * Class SaveColorRoute
  * TODO Explain class concept
  * @package React\Api
  */
-class SaveColorRoute{
-  private const FORM_KEY = 'form';
+class SaveColorRoute {
+  private const JSON_FILENAME = '../../../database/colorsData.json';
+
   /**
    * Generates a json file that saves the user's color data
    * - Get previous values
@@ -17,23 +19,27 @@ class SaveColorRoute{
    * - Add current changes ($myarr)
    * - Loop over existing values and add those differents from current changes (type attribute)
    * - save new array into colorsData.json
-   * @param array $myarr
+   * @param IColorsUsers $userData Colors object for connected user
    */
-  public function generateJsonFile(array $myarr): void {
-    $currentJSON = json_decode(file_get_contents('../../../database/colorsData.json'));
-    $newContentJson = [];
-    $newContentJson[] = $myarr; // Stores new values
+  private function generateJsonFile(IColorsUsers $userData): void {
+    /** @var IColorsUsers[]|false $currentJSON */
+    $currentJSON = json_decode(file_get_contents(self::JSON_FILENAME));
+
+    // Stores new values
+    $newContentJson = [$userData];
+
     if ($currentJSON !== false) {
       foreach ($currentJSON as $value) {
-          if ($value->type !== $myarr['type']) {
-            $newContentJson[] = $value; // keeps saved values
-          }
+        // Lorsque le user dans le fichier json est déférent au username passé en params on l'ajoute
+        if ($value->user !== $userData->user) {
+          $newContentJson[] = $value;
+        }
       }
     }
 
     // save $newContentJson into colorsData.json
     $json = json_encode($newContentJson);
-    file_put_contents("../../../database/colorsData.json", $json);
+    file_put_contents(self::JSON_FILENAME, $json);
   }
 
   /**
@@ -41,22 +47,22 @@ class SaveColorRoute{
    * @return ?array
    */
   public function getData(): array {
-      $currentJSON = json_decode(file_get_contents('../../../database/colorsData.json'));
-      if (is_array($currentJSON)) {
-          return $currentJSON;
-      }
-      return [];
-    // var_dump($_SESSION[self::FORM_KEY]);exit;
-    //return !empty($_SESSION[self::FORM_KEY]) ? $_SESSION[self::FORM_KEY] : [];
-
+    $currentJSON = json_decode(file_get_contents(self::JSON_FILENAME));
+    if (is_array($currentJSON)) {
+      return $currentJSON;
+    }
+    return [];
   }
 
   /**
-   * Save Form Data
-   * @param array $data Form database
+   * Save Colors for connected user
+   * @param array $data Colors for connected user
+   * @param string $username Connected user name
    */
-  public function setData(array $data, string $usernameObj): void {
-    //$_SESSION[self::FORM_KEY] = $data;
-    $this->generateJsonFile($data, $usernameObj);
+  public function setData(array $data, string $username): void {
+    $userData = new IColorsUsers();
+    $userData->user = $username;
+    $userData->colors = $data;
+    $this->generateJsonFile($userData);
   }
 }
