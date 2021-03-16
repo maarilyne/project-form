@@ -2,7 +2,6 @@ import React from 'react';
 import LoadComponent from '../load-component';
 import PanelColorComponent, {IPanelColorComponentProps} from '../PanelColor/panelColor-component';
 
-
 // Opens the panel when the user clicks on the btn
 const openPanel = (e: any) => {
   e.preventDefault();
@@ -17,7 +16,6 @@ const openPanel = (e: any) => {
     LoadComponent.loadSideComponentWProps(PanelColorComponent, { elemType: elTarget } as IPanelColorComponentProps);
     });
 };
-
 
 // Functional component that enables the user to select which element of the page will be edited
 const ElementSelector: React.FC<any> = () => {

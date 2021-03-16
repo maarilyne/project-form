@@ -33,6 +33,7 @@ class LoginRoute {
    */
   public function logUser(array $credentials): bool {
     $pwd = RegisterRoute::getPwdHashed($credentials[1]);
+    echo
     $json_file = json_decode(file_get_contents('../../../database/usersData.json'));
     if (is_array($json_file)) {
       /** @var IUser $user */
